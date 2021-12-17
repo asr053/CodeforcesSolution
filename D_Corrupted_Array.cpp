@@ -18,7 +18,6 @@ using namespace chrono;
 #define nline "\n"
 #define pb push_back
 #define ppb pop_back
-#define mp make_pair
 #define ff first
 #define ss second
 #define PI 3.141592653589793238462
@@ -26,7 +25,7 @@ using namespace chrono;
 #define sz(x) ((int)(x).size())
 #define all(x) (x).begin(), (x).end()
 
-#ifdef Abhay_Raghuvanshi
+#ifdef Abhay_singh_raghuvanshi
 #define debug(x) cerr << #x <<" "; _print(x); cerr << endl;
 #else
 #define debug(x);
@@ -74,26 +73,48 @@ ll mod_sub(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a - b) % m) + m) %
 ll mod_div(ll a, ll b, ll m) {a = a % m; b = b % m; return (mod_mul(a, mminvprime(b, m), m) + m) % m;}  //only for prime m
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 void precision(int a) {cout << setprecision(a) << fixed;}
-void reverse(vector<ll>v){ll low = 0; ll high = v.size()-1;while(low<=high){
-    ll temp = v[low];v[low]=v[high];v[high]=v[temp];low++;high--;
-}
-}int main()
+
+int main()
 {
     fast int t;
     cin>>t;
     while (t--)
-    {  
-       ll n;
-       cin>>n;
-       ll arr[n];
-       for(int i=0;i<n;i++){
-           cin>>arr[i];
-       }
-       ll sum = 0;
-       for(int i=0;i<3;i++){
-          sum += arr[i];
-       }
-       cout<<sum+2<<endl;
+    {
+      int n;cin>>n;
+      vector<ll>v(n+2);
+      unordered_map<ll,ll>mp;
+      ll sum = 0;
+      for(int i=0;i<n+2;i++){cin>>v[i];mp[v[i]]++;sum+=v[i];}
+       sort(v.begin(),v.end());
+       ll index , val ;
+       bool check=0;
+       for(int i=0;i<n+2;i++){
+          if((sum-v[i])%2==0){
+              if(mp.count((sum-v[i])/2)){
+                  if((sum-v[i])/2 ==v[i]){
+                      if(mp[v[i]]>1){
+                           index = i;
+                 val = (sum-v[i])/2;
+                 check=1;
+                 break;
+                      }
+                  }else{
+                 index = i;
+                 val = (sum-v[i])/2;
+                 check=1;
+                 break;
+                  }
+              }
+          }
+       } int x =1;
+       if(check){
+           for(int i=0;i<n+2;i++){
+               if(i==index)continue;
+               else if(val==v[i]&&x){x=0;continue;}
+               else cout<<v[i]<<" ";
+           }
+       }else cout<<-1;
+       cout<<endl;
     }
     return 0;
 }

@@ -26,7 +26,7 @@ using namespace chrono;
 #define sz(x) ((int)(x).size())
 #define all(x) (x).begin(), (x).end()
 
-#ifdef Abhay_Raghuvanshi
+#ifdef Abhay_singh_raghuvanshi
 #define debug(x) cerr << #x <<" "; _print(x); cerr << endl;
 #else
 #define debug(x);
@@ -74,26 +74,23 @@ ll mod_sub(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a - b) % m) + m) %
 ll mod_div(ll a, ll b, ll m) {a = a % m; b = b % m; return (mod_mul(a, mminvprime(b, m), m) + m) % m;}  //only for prime m
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 void precision(int a) {cout << setprecision(a) << fixed;}
-void reverse(vector<ll>v){ll low = 0; ll high = v.size()-1;while(low<=high){
-    ll temp = v[low];v[low]=v[high];v[high]=v[temp];low++;high--;
-}
-}int main()
+
+int main()
 {
     fast int t;
     cin>>t;
     while (t--)
-    {  
-       ll n;
-       cin>>n;
-       ll arr[n];
-       for(int i=0;i<n;i++){
-           cin>>arr[i];
+    {
+       ll n,k;
+       cin>>n>>k;
+       if(n%2)cout<<n/2<<" "<<n/2<<" "<<1<<endl;
+       else {
+           if(n%4)
+               cout<<2*(n/4)<<" "<<2*(n/4)<<" "<<2<<endl;
+               else 
+               cout<<n/2<<" "<<n/4<<" "<<n/4<<endl;
+           
        }
-       ll sum = 0;
-       for(int i=0;i<3;i++){
-          sum += arr[i];
-       }
-       cout<<sum+2<<endl;
     }
     return 0;
 }
